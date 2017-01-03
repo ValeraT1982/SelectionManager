@@ -175,7 +175,7 @@ namespace SelectionManager.Tests
         }
 
         [Test]
-        public void RemoveElementTest()
+        public void RemoveSelectedElementTest()
         {
             var element1 = new SelectableElementStub();
             var element2 = new SelectableElementStub();
@@ -186,14 +186,11 @@ namespace SelectionManager.Tests
                 element2
             };
             selectionManager.AddCollection(collection);
-            element1.Selected = true;
-            collection.Remove(element1);
-            
             element2.Selected = true;
+            collection.Remove(element2);
 
-            Assert.AreEqual(element2, selectionManager.SelectedElement);
+            Assert.AreEqual(element1, selectionManager.SelectedElement);
             Assert.IsTrue(element1.Selected);
-            Assert.IsTrue(element2.Selected);
         }
 
         [Test]

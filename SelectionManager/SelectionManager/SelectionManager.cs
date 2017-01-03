@@ -88,6 +88,8 @@ namespace SelectionManager
         {
             _elements.Remove(element);
             RemoveSelectableElements(element);
+            element.PropertyChanged -= element_PropertyChanged;
+
             if (SelectedElement == element)
             {
                 SelectedElement = null;
@@ -96,8 +98,6 @@ namespace SelectionManager
                     _elements[0].Selected = true;
                 }
             }
-
-            element.PropertyChanged -= element_PropertyChanged;
         }
 
         private void element_PropertyChanged(object sender, PropertyChangedEventArgs e)

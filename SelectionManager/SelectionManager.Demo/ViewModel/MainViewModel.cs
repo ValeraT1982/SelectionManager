@@ -28,7 +28,7 @@ namespace SelectionManagerDemo.ViewModel
             ListElements = new ObservableCollection<ListElementViewModel>();
             AddHierarchicalElementCommand = new RelayCommand(AddHierarchicalElement);
             RemoveHierarchicalElementCommand = new RelayCommand(
-                RemoveHierarchicalElement, 
+                RemoveHierarchicalElement,
                 () => Manager.SelectedElement is HierarchicalElementViewModel);
             AddListElementCommand = new RelayCommand(AddListElement);
             RemoveListElementCommand = new RelayCommand(
@@ -45,11 +45,15 @@ namespace SelectionManagerDemo.ViewModel
             var selectedHierarchicalElement = Manager.SelectedElement as HierarchicalElementViewModel;
             if (selectedHierarchicalElement != null)
             {
-                selectedHierarchicalElement.Subitems.Add(new HierarchicalElementViewModel(selectedHierarchicalElement) { Name = "Child Element" });
+                var newItem = new HierarchicalElementViewModel(selectedHierarchicalElement) { Name = "Child Element" };
+                selectedHierarchicalElement.Subitems.Add(newItem);
+                newItem.Selected = true;
             }
             else
             {
-                HierarchicalElements.Add(new HierarchicalElementViewModel(null) { Name = "Root Element" });
+                var newItem = new HierarchicalElementViewModel(null) { Name = "Root Element" };
+                HierarchicalElements.Add(newItem);
+                newItem.Selected = true;
             }
         }
 
@@ -69,7 +73,9 @@ namespace SelectionManagerDemo.ViewModel
 
         private void AddListElement()
         {
-            ListElements.Add(new ListElementViewModel { Description = "List Element" });
+            var newItem = new ListElementViewModel { Description = "List Element" };
+            ListElements.Add(newItem);
+            newItem.Selected = true;
         }
 
         private void RemoveListElement()
